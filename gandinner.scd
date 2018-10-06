@@ -2,5 +2,16 @@
 
 TXSystem1.start(showAudioOptions: false);
 
+(
+//l = NetAddr(\localhost.asString, 57120);
+OSCdef.new( \speechreload, { |data,time,source|
+	"reloading speech".postln;
+	data.postln;
+	if (TXSamplePlayer5a.arrInstances.size > 0) {
+			TXSamplePlayer5a.arrInstances[0].loadSample(1);
+	}
+}, '/speech');
+)
 
-OSCdef( \speechreload, { |data,time,source| data.postln; }, '/speech/reload' );
+
+l.sendMsg("/speech", 111);
